@@ -23,7 +23,13 @@ import static org.testng.Reporter.log;
 
 public class WeatherLocationPage {
     static PropertyLoader testData;
-    static ChromeDriver driver = new ChromeDriver();
+    static WebDriver driver = new ChromeDriver();
+    public WeatherLocationPage(WebDriver driver)
+    {
+        this.driver=driver;
+        PageFactory.initElements(driver,this);
+    }
+
     private static WebElement acceptCookieButton;
     private static WebElement signInButton;
     private static WebElement exampleInputEmail1;
@@ -31,6 +37,7 @@ public class WeatherLocationPage {
     private static WebElement signInButtonmodel;
     private static WebElement weatherOption;
     private static WebElement weatherLoc;
+   // @FindBy(xpath = "//button[text()='Search']")
     private static WebElement weatherLocSearch;
     private static WebElement locationValue;
     private static List<WebElement> locationList;
@@ -94,7 +101,8 @@ public class WeatherLocationPage {
         for (String locationMapValueEle : locationMapValues) {
             for (WebElement locElement : locationList) {
                 if (locationMapValueEle.equals(locElement.getText()))
-                    System.out.println("location name is matched with " + locElement.getText());
+                    Assert.assertEquals(locationMapValueEle, locElement.getText(), "location name is matched with " + locElement.getText());
+//                    System.out.println("location name is matched with " + locElement.getText());
             }
         }
     }

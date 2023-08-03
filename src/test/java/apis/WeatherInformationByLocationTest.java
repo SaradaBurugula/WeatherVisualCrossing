@@ -33,11 +33,11 @@ public class WeatherInformationByLocationTest extends BaseRest {
         Response locResponse= LocationInfo.weatherLocInfo(locationName, key);
         if(locResponse.getStatusCode()==200)
         {
-            log("Valid status code, got the response");
+            System.out.println("Valid status code, got the response");
+            System.out.println("Validating response");
+            LocationValidations.verifyLocationWeather(locResponse,locationName);
         }
         else
-            log("Invalid status code");
-        log("Validating response");
-        LocationValidations.verifyLocationWeather(locResponse,locationName);
+            System.out.println("Invalid status code");
     }
 }

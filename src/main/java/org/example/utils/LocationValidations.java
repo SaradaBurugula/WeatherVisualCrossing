@@ -1,6 +1,7 @@
 package org.example.utils;
 
 import io.restassured.response.Response;
+import org.testng.Assert;
 
 import java.util.Arrays;
 import java.util.List;
@@ -12,10 +13,9 @@ public class LocationValidations {
 
            String locationName = locResponse.jsonPath().get("address");
            String resolvedAddress=locResponse.jsonPath().get("resolvedAddress");
-            if (locationName.equals(locname) && resolvedAddress.contains(locname))
-                log(locationName+" is matched with response");
+           if (locationName.equals(locname) && resolvedAddress.contains(locname))
+                Assert.assertEquals(locationName,locname,locationName+" is matched with response");
             else
-                log(locationName+" is not matched with response");
+               Assert.assertEquals(locationName,locname,locationName+" is not matched with response");
        }
-
 }
